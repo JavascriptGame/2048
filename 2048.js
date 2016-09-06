@@ -86,6 +86,7 @@ game2048.prototype = {
             } else if (prevVal == currVal) {
                 this.setTileVal(prevTile, prevVal * 2);
                 this.setTileVal(currTile, 0);
+                score += (parseInt(prevVal)+parseInt(currVal))
             }
         }
     },
@@ -125,11 +126,12 @@ game2048.prototype = {
     }
 };
 
-var game, startBtn;
+var game, startBtn, score = 0;
 
 window.onload = function() {
     var container = document.getElementById('div2048');
     startBtn = document.getElementById('start');
+    document.getElementById('score').innerHTML = score
     startBtn.onclick = function() {
         this.style.display = 'none';
         game = game || new game2048(container);
@@ -154,4 +156,5 @@ window.onkeydown = function(e) {
         }
         game.move(keychar);
     }
+    document.getElementById('score').innerHTML = score 
 };
